@@ -1,16 +1,12 @@
-﻿using AdventureWorks.Dal;
-using AdventureWorks.Service.Interfaces;
+﻿using AdventureWorks.Service.Interfaces;
 using AdventureWorks.Service.Services;
 using AdventureWorks.Web.Models.Product;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AdventureWorks.Web.Controllers
 {
-    [RoutePrefix("Products")]
+    [RoutePrefix("{culture}/Products")]
     [Route("{action=Index}")]
     public class ProductController : BaseController
     {
@@ -22,10 +18,9 @@ namespace AdventureWorks.Web.Controllers
         }
 
         // GET: Product
-        [Route]
         public ActionResult Index()
         {
-            var data = productService.GetProductCatalog("en");
+            var data = productService.GetProductCatalog(base.currentCulture);
             IndexViewModel vm = new IndexViewModel
             {
                 Catalogs = data.Select(d => new IndexProductCatalog

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model AdventureWorks.Web.Models.BaseViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,6 +25,18 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                    <li>
+                        <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Language
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach (var culture in Model.Cultures)
+                            {
+                                <a class="dropdown-item" href="@Url.Action((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"],  new { culture = culture.ID })">@culture.Name</a>
+                            }
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -86,7 +86,8 @@
     <Compile Include="BusinessEntityContact.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DbRepository.cs" />
+    <Compile Include="IDbRepository.cs" />
     <Compile Include="ContactType.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
     </Compile>

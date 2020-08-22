@@ -1,7 +1,41 @@
-﻿
+﻿@model AdventureWorks.Web.Models.Product.IndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>Model Name</th>
+            <th>Model Description</th>
+            <th>Product Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var catalog in Model.Catalogs)
+        {
+            <tr>
+                <td rowspan="@catalog.Products.Length">@catalog.ModelName</td>
+                <td rowspan="@catalog.Products.Length">@catalog.ModelDesc</td>
+                <td>@catalog.Products.First().Name</td>
+                <td>
+                    @Html.ActionLink("View Detail", "Details", new { id = catalog.Products.First().ID })
+                </td>
+            </tr>
+            if (catalog.Products.Length > 1)
+            {
+                for (var i = 1; i < catalog.Products.Length; i++)
+                {
+                    <tr>
+                        <td>@catalog.Products[i].Name</td>
+                        <td>@Html.ActionLink("View Detail", "Details", new { id = catalog.Products[i].ID })</td>
+                    </tr>
+                }
+            }
+
+        }
+    </tbody>
+</table>

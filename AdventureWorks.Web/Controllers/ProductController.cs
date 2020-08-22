@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.Interfaces;
+using AdventureWorks.Service.Services;
+using AdventureWorks.Web.Models.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +12,34 @@ namespace AdventureWorks.Web.Controllers
 {
     [RoutePrefix("Products")]
     [Route("{action=Index}")]
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
+        private IProductService productService;
+
+        public ProductController()
+        {
+            productService = new ProductService();
+        }
+
         // GET: Product
         [Route]
         public ActionResult Index()
         {
-            return View();
+            var data = productService.GetProductCatalog("en");
+            IndexViewModel vm = new IndexViewModel
+            {
+                Catalogs = data.Select(d => new IndexProductCatalog
+                {
+                    ModelName = d.ModelName,
+                    ModelDesc = d.ModelDesc,
+                    Products = d.Products.Select(p => new IndexProduct
+                    {
+                        ID = p.ID,
+                        Name = p.Name
+                    }).ToArray()
+                }).ToArray()
+            };
+            return View(vm);
         }
 
         // GET: Product/Details/5

@@ -9,9 +9,11 @@ namespace AdventureWorks.Dal
     public class DbRepository<TEntity> : IDbRepository<TEntity>
         where TEntity : class
     {
-        protected DbContext context;
+        private DbContext context;
 
-        protected DbRepository(DbContext context)
+        public DbRepository() : this(new AdventureWorksEntities()) { }
+
+        public DbRepository(DbContext context)
         {
             this.context = context;
         }

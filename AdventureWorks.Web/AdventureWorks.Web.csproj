@@ -126,11 +126,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -192,6 +194,10 @@
     <ProjectReference Include="..\AdventureWorks.Dal\AdventureWorks.Dal.csproj">
       <Project>{4d5e5871-3d44-4571-beaa-382bff381c4f}</Project>
       <Name>AdventureWorks.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdventureWorks.Service\AdventureWorks.Service.csproj">
+      <Project>{b1b72ccd-35a2-47c5-beac-4ae9e3d4dd32}</Project>
+      <Name>AdventureWorks.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

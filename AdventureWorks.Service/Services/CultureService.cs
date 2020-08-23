@@ -14,6 +14,24 @@ namespace AdventureWorks.Service.Services
             cultureRepo = new DbRepository<Culture>();
         }
 
+        public void CreateCulture(Dtos.Culture culture)
+        {
+            try
+            {
+                var c = new Culture
+                {
+                    CultureID = culture.ID,
+                    Name = culture.Name,
+                    ModifiedDate = DateTime.Now
+                };
+                cultureRepo.Create(c);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public string[] GetCultureIDs()
         {
             try
@@ -40,6 +58,36 @@ namespace AdventureWorks.Service.Services
                         Name = c.Name
                     }).ToArray();
                 return cultures;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void UpdateCulture(Dtos.Culture culture)
+        {
+            try
+            {
+                var c = new Culture
+                {
+                    CultureID = culture.ID,
+                    Name = culture.Name,
+                    ModifiedDate = DateTime.Now
+                };
+                cultureRepo.Update(c);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void DeleteCulture(string cultureID)
+        {
+            try
+            {
+                cultureRepo.Delete(cultureRepo.Get(cr => cr.CultureID == cultureID));
             }
             catch (Exception e)
             {

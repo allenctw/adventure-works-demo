@@ -94,5 +94,18 @@ namespace AdventureWorks.Dal
                 throw e;
             }
         }
+
+        public void Delete(IQueryable<TEntity> entities)
+        {
+            try
+            {
+                this.context.Set<TEntity>().RemoveRange(entities);
+                this.context.SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw e;
+            }
+        }
     }
 }

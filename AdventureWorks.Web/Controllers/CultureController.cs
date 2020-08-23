@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.Interfaces;
+using AdventureWorks.Service.Services;
+using AdventureWorks.Web.Models.Culture;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using AdventureWorks.Dal;
-using AdventureWorks.Service.Dtos;
-using AdventureWorks.Web.Models.Culture;
 
 namespace AdventureWorks.Web.Controllers
 {
@@ -17,6 +14,12 @@ namespace AdventureWorks.Web.Controllers
     public class CultureController : BaseController
     {
         private AdventureWorksEntities db = new AdventureWorksEntities();
+        private ICultureService cultureService;
+
+        public CultureController()
+        {
+            cultureService = new CultureService();
+        }
 
         // GET: Culture
         public ActionResult Index()
@@ -72,14 +75,12 @@ namespace AdventureWorks.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Dal.Culture c = new Dal.Culture
+                Service.Dtos.Culture c = new Service.Dtos.Culture
                 {
-                    CultureID = inputModel.CultureID,
-                    Name = inputModel.Name,
-                    ModifiedDate = DateTime.Now
+                    ID = inputModel.CultureID,
+                    Name = inputModel.Name
                 };
-                db.Cultures.Add(c);
-                db.SaveChanges();
+                cultureService.CreateCulture(c);
                 return RedirectToAction("Index");
             }
 
@@ -118,14 +119,12 @@ namespace AdventureWorks.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Dal.Culture c = new Dal.Culture
+                Service.Dtos.Culture c = new Service.Dtos.Culture
                 {
-                    CultureID = inputModel.CultureID,
-                    Name = inputModel.Name,
-                    ModifiedDate = DateTime.Now
+                    ID = inputModel.CultureID,
+                    Name = inputModel.Name
                 };
-                db.Entry(c).State = EntityState.Modified;
-                db.SaveChanges();
+                cultureService.UpdateCulture(c);
                 return RedirectToAction("Index");
             }
             return View(new CreateViewModel());
@@ -159,9 +158,7 @@ namespace AdventureWorks.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Dal.Culture culture = db.Cultures.Find(id);
-            db.Cultures.Remove(culture);
-            db.SaveChanges();
+            cultureService.DeleteCulture(id);
             return RedirectToAction("Index");
         }
     }

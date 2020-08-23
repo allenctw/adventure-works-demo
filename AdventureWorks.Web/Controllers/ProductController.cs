@@ -1,6 +1,7 @@
 ﻿using AdventureWorks.Service.Interfaces;
 using AdventureWorks.Service.Services;
 using AdventureWorks.Web.Models.Product;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -41,7 +42,20 @@ namespace AdventureWorks.Web.Controllers
         [Route("{id:int}")]
         public ActionResult Details(int id)
         {
-            return View();
+            var data = productService.GetProductDetail(id);
+            if(data == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            DetailsViewModel vm = new DetailsViewModel
+            {
+                ProductID = data.ProductID,
+                ProductThumbNailPhoto = Convert.ToBase64String(data.ProductThumbNailPhoto),
+                ProductNumber = data.ProductNumber,
+                ProductName = data.ProductName,
+                ProductListPrice = data.ProductListPrice
+            };
+            return View(vm);
         }
 
         // GET: Product/Create

@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +45,7 @@
     <Compile Include="Dtos\Culture.cs" />
     <Compile Include="Dtos\Product.cs" />
     <Compile Include="Dtos\ProductCatalog.cs" />
+    <Compile Include="Dtos\ProductDetail.cs" />
     <Compile Include="Interfaces\ICultureService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

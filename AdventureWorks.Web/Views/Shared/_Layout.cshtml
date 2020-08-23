@@ -1,5 +1,7 @@
 ﻿@model AdventureWorks.Web.Models.BaseViewModel
-
+@{
+    var routeValues = new RouteValueDictionary(ViewContext.RouteData.Values);
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             @foreach (var culture in Model.Cultures)
                             {
-                                <a class="dropdown-item" href="@Url.Action((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"],  new { culture = culture.ID })">@culture.Name</a>
+                                routeValues["culture"] = culture.ID;
+                                <a class="dropdown-item" href="@Url.RouteUrl(routeValues)">@culture.Name</a>
                             }
                         </div>
                     </li>

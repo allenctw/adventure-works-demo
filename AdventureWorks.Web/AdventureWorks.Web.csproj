@@ -127,12 +127,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseViewModel.cs" />
+    <Compile Include="Models\Culture\CreateInputModel.cs" />
+    <Compile Include="Models\Culture\CreateViewModel.cs" />
+    <Compile Include="Models\Culture\DetailsViewModel.cs" />
+    <Compile Include="Models\Culture\IndexViewModel.cs" />
+    <Compile Include="Models\Culture\EditInputModel.cs" />
     <Compile Include="Models\Product\DetailsViewModel.cs" />
     <Compile Include="Models\Product\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +181,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Culture\Create.cshtml" />
+    <Content Include="Views\Culture\Delete.cshtml" />
+    <Content Include="Views\Culture\Details.cshtml" />
+    <Content Include="Views\Culture\Edit.cshtml" />
+    <Content Include="Views\Culture\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

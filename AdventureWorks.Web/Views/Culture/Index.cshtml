@@ -1,0 +1,34 @@
+﻿@model AdventureWorks.Web.Models.Culture.IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Culture Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Cultures)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CultureID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CultureID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CultureID })
+            </td>
+        </tr>
+    }
+
+</table>

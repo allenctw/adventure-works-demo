@@ -1,9 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.Interfaces;
+using AdventureWorks.Service.Services;
+using System.Web.Mvc;
 
 namespace AdventureWorks.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        public HomeController(IDbRepository<Culture> cultureRepo) : base(cultureRepo) { }
+
         [Route("{culture}")]
         public ActionResult Index()
         {

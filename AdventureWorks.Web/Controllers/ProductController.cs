@@ -1,4 +1,5 @@
-﻿using AdventureWorks.Service.Interfaces;
+﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.Interfaces;
 using AdventureWorks.Service.Services;
 using AdventureWorks.Web.Models.Product;
 using System;
@@ -13,7 +14,7 @@ namespace AdventureWorks.Web.Controllers
     {
         private IProductService productService;
 
-        public ProductController()
+        public ProductController(IDbRepository<Culture> cultureRepo) : base(cultureRepo)
         {
             productService = new ProductService();
         }

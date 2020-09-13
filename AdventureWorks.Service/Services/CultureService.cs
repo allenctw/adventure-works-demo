@@ -9,9 +9,9 @@ namespace AdventureWorks.Service.Services
     {
         private IDbRepository<Culture> cultureRepo;
 
-        public CultureService()
+        public CultureService(IDbRepository<Culture> iCultureRepo)
         {
-            cultureRepo = new DbRepository<Culture>();
+            cultureRepo = iCultureRepo;
         }
 
         public void CreateCulture(Dtos.Culture culture)

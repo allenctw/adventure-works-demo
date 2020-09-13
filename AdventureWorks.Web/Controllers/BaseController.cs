@@ -1,4 +1,5 @@
-﻿using AdventureWorks.Service.Interfaces;
+﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.Interfaces;
 using AdventureWorks.Service.Services;
 using AdventureWorks.Web.Models;
 using System.Linq;
@@ -8,12 +9,12 @@ namespace AdventureWorks.Web.Controllers
 {
     public class BaseController : Controller
     {
-        private ICultureService cultureService;
+        protected ICultureService cultureService;
         protected string currentCulture;
 
-        public BaseController()
+        public BaseController(IDbRepository<Culture> cultureRepo)
         {
-            cultureService = new CultureService();
+            cultureService = new CultureService(cultureRepo);
             currentCulture = "en";
         }
 

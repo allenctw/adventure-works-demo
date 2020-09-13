@@ -14,12 +14,8 @@ namespace AdventureWorks.Web.Controllers
     public class CultureController : BaseController
     {
         private AdventureWorksEntities db = new AdventureWorksEntities();
-        private ICultureService cultureService;
 
-        public CultureController()
-        {
-            cultureService = new CultureService();
-        }
+        public CultureController(IDbRepository<Culture> cultureRepo) : base(cultureRepo) { }
 
         // GET: Culture
         public ActionResult Index()
@@ -80,7 +76,7 @@ namespace AdventureWorks.Web.Controllers
                     ID = inputModel.CultureID,
                     Name = inputModel.Name
                 };
-                cultureService.CreateCulture(c);
+                base.cultureService.CreateCulture(c);
                 return RedirectToAction("Index");
             }
 
@@ -124,7 +120,7 @@ namespace AdventureWorks.Web.Controllers
                     ID = inputModel.CultureID,
                     Name = inputModel.Name
                 };
-                cultureService.UpdateCulture(c);
+                base.cultureService.UpdateCulture(c);
                 return RedirectToAction("Index");
             }
             return View(new CreateViewModel());
@@ -158,7 +154,7 @@ namespace AdventureWorks.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            cultureService.DeleteCulture(id);
+            base.cultureService.DeleteCulture(id);
             return RedirectToAction("Index");
         }
     }

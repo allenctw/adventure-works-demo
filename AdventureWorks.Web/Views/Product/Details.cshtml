@@ -45,5 +45,31 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-primary" })
+    <button class="btn btn-primary" id="add-to-cart-btn">Add to Cart</button>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
 </p>
+
+@section scripts{
+    <script>
+        var item = {
+            ProductID: @Model.ProductID,
+            ProductName: '@Model.ProductName',
+            ProductListPrice: @Model.ProductListPrice
+        };
+        $("#add-to-cart-btn").click(function () {
+            $.ajax({
+                url: "/@ViewContext.RouteData.Values["culture"]/Cart/AddToCart",
+                type: "POST",
+                data: JSON.stringify(item),
+                contentType: "application/json",
+                cache: false,
+                success: function (data) {
+                    if (data.success)
+                        alert('successfully added');
+                    else
+                        alert('failed to added');
+                }
+            });
+        });
+    </script>
+}

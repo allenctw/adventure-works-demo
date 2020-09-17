@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -150,6 +151,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseViewModel.cs" />
+    <Compile Include="Models\Cart\CartItem.cs" />
+    <Compile Include="Models\Cart\CartViewModel.cs" />
     <Compile Include="Models\Culture\CreateInputModel.cs" />
     <Compile Include="Models\Culture\CreateViewModel.cs" />
     <Compile Include="Models\Culture\DetailsViewModel.cs" />
@@ -202,6 +205,7 @@
     <Content Include="Views\Culture\Details.cshtml" />
     <Content Include="Views\Culture\Edit.cshtml" />
     <Content Include="Views\Culture\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

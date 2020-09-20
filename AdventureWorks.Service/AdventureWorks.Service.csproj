@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscountCore\IDiscountStrategy.cs" />
+    <Compile Include="DiscountCore\Product.cs" />
+    <Compile Include="DiscountCore\RebateStrategy.cs" />
     <Compile Include="Dtos\Culture.cs" />
     <Compile Include="Dtos\Product.cs" />
     <Compile Include="Dtos\ProductCatalog.cs" />

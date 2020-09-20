@@ -1,4 +1,5 @@
 ﻿using AdventureWorks.Dal;
+using AdventureWorks.Service.DiscountCore;
 using AdventureWorks.Web.Models.Cart;
 using Newtonsoft.Json;
 using System;
@@ -13,14 +14,32 @@ namespace AdventureWorks.Web.Controllers
     [Route("{action=Index}")]
     public class CartController : BaseController
     {
-        public CartController(IDbRepository<Culture> cultureRepo) : base(cultureRepo) { }
+        private IDiscountStrategy rebateStrategy;
+
+        public CartController(IDbRepository<Culture> cultureRepo) : base(cultureRepo)
+        {
+            rebateStrategy = new RebateStrategy();
+        }
 
         // GET: Cart
         public ActionResult Index()
         {
-            var vm = new CartViewModel();
             var reqCookie = Request.Cookies.Get("CartItems");
-            vm.CartItems = JsonConvert.DeserializeObject<CartItem[]>(reqCookie.Value);
+            var carItems = JsonConvert.DeserializeObject<CartItem[]>(reqCookie.Value);
+            var products = carItems.Select(
+                c => new Service.DiscountCore.Product
+                {
+                    Name = c.ProductName,
+                    Qty = 1,
+                    Price = c.ProductListPrice
+                }).ToList();
+            var discount = rebateStrategy.CalculateDiscount(products);
+
+            var vm = new CartViewModel
+            {
+                CartItems = carItems,
+                Discount = discount
+            };
             return View(vm);
         }
 

@@ -35,8 +35,19 @@
             </tr>
         }
         <tr>
-            <td colspan="2">Total</td>
+            <td></td>
+            <td align="right">Total</td>
             <td>@Model.CartItems.Sum(c => c.ProductListPrice)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">Discount</td>
+            <td>@Model.Discount</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">Final</td>
+            <td>@(Model.CartItems.Sum(c => c.ProductListPrice) - Model.Discount)</td>
         </tr>
     </tbody>
 </table>
